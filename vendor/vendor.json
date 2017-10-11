@@ -3,4 +3,7 @@
 	"ignore": "test",
 	"package": [],
 	"rootPath": "github.com/David-Sharpe/heracles-api"
+    "heroku": {
+        "goVersion": "go1.8"
+    }
 }
