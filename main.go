@@ -19,10 +19,17 @@ import (
 
 var db *pg.DB
 
+func getIDFromRequest(request *http.Request) int64 {
+    id, err := strconv.ParseInt(pat.Param(request, "id"), 10, 64)
+    if err != nil {
+        panic(err)
+    }
+    return id
+}
+
 func getWorkout(writer http.ResponseWriter, request *http.Request) {
-    id, _ := strconv.ParseInt(pat.Param(request, "id"), 10, 64)
     workout := workouts.Workout{
-        ID: id,
+        ID: getIDFromRequest(request),
     }
     workout.Read(db)
     res, _ := json.Marshal(workout)
@@ -78,6 +85,7 @@ func main() {
     db = pg.Connect(&pg.Options{
         User: "postgres",
         Password: os.Getenv("DB_PASSWORD"),
+        Database: "heracles"
     })
 
     mux := goji.NewMux()
