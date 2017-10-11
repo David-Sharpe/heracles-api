@@ -3,7 +3,7 @@ package main
 import (
     "github.com/realistschuckle/gohaml"
     "github.com/joho/godotenv"
-    "github.com/David-Sharpe/heracles/workouts"
+    "github.com/David-Sharpe/heracles-api/workouts"
     "github.com/go-pg/pg"
     "fmt"
     "text/template"
@@ -77,7 +77,7 @@ func main() {
         Database: "heracles",
     })
 
-    hamlHandler, _ := gohaml.NewHamlHandler("./haml")
+    // hamlHandler, _ := gohaml.NewHamlHandler("./haml")
     mux := goji.NewMux()
     mux.HandleFunc(pat.Get("/workouts/:id"), getWorkout)
     mux.HandleFunc(pat.Put("/workouts/:id"), putWorkout)
