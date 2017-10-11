@@ -3,7 +3,7 @@ package main
 import (
     "github.com/realistschuckle/gohaml"
     "github.com/joho/godotenv"
-    "github.com/David-Sharpe/heracles/workouts"
+    "github.com/David-Sharpe/heracles-api/workouts"
     "github.com/go-pg/pg"
     "fmt"
     "text/template"

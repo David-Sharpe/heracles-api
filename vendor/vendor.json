@@ -1,9 +1,88 @@
 {
 	"comment": "",
+	"heroku": {
+		"goVersion": "go1.8"
+	},
 	"ignore": "test",
-	"package": [],
-	"rootPath": "github.com/David-Sharpe/heracles-api",
-    "heroku": {
-        "goVersion": "go1.8"
-    }
+	"package": [
+		{
+			"checksumSHA1": "OQextbZap3WdeI0gUJSWigFeRs0=",
+			"path": "github.com/go-pg/pg",
+			"revision": "995ba38ec9633a41f93850734f6dd9d916b68337",
+			"revisionTime": "2017-09-05T09:54:36Z"
+		},
+		{
+			"checksumSHA1": "woD4nXIeDEohb5GX6EYSJuWlXoc=",
+			"path": "github.com/go-pg/pg/internal",
+			"revision": "995ba38ec9633a41f93850734f6dd9d916b68337",
+			"revisionTime": "2017-09-05T09:54:36Z"
+		},
+		{
+			"checksumSHA1": "ORf1Tzc47pPj2NCf8IsUZozU5rE=",
+			"path": "github.com/go-pg/pg/internal/parser",
+			"revision": "995ba38ec9633a41f93850734f6dd9d916b68337",
+			"revisionTime": "2017-09-05T09:54:36Z"
+		},
+		{
+			"checksumSHA1": "23mDJPuLBAdhR3R48WEUpwojAa4=",
+			"path": "github.com/go-pg/pg/internal/pool",
+			"revision": "995ba38ec9633a41f93850734f6dd9d916b68337",
+			"revisionTime": "2017-09-05T09:54:36Z"
+		},
+		{
+			"checksumSHA1": "R2TN5W+F5iflxFs1pAdp1VFeR2I=",
+			"path": "github.com/go-pg/pg/orm",
+			"revision": "995ba38ec9633a41f93850734f6dd9d916b68337",
+			"revisionTime": "2017-09-05T09:54:36Z"
+		},
+		{
+			"checksumSHA1": "GBu4wUospff6NnPHHHYxipn2I/U=",
+			"path": "github.com/go-pg/pg/types",
+			"revision": "995ba38ec9633a41f93850734f6dd9d916b68337",
+			"revisionTime": "2017-09-05T09:54:36Z"
+		},
+		{
+			"checksumSHA1": "VIp1lZm6joWhlNdwhady8u//qRw=",
+			"path": "github.com/jinzhu/inflection",
+			"revision": "1c35d901db3da928c72a72d8458480cc9ade058f",
+			"revisionTime": "2017-01-02T12:52:26Z"
+		},
+		{
+			"checksumSHA1": "0cdNscA7+z4+lKF5usZYz3it/04=",
+			"path": "github.com/joho/godotenv",
+			"revision": "a79fa1e548e2c689c241d10173efd51e5d689d5b",
+			"revisionTime": "2017-09-18T06:32:59Z"
+		},
+		{
+			"checksumSHA1": "REGZT2XAcztfzM0pSLhZ2QmeHaY=",
+			"path": "github.com/realistschuckle/gohaml",
+			"revision": "41f18a7978538aaafa16cbc1b37b10ccae04f478",
+			"revisionTime": "2015-09-08T17:24:37Z"
+		},
+		{
+			"checksumSHA1": "OvrNwcBO+xO4FZ7eMbazho1C3t0=",
+			"path": "goji.io",
+			"revision": "0d89ff54b2c18c9c4ba530e32496aef902d3c6cd",
+			"revisionTime": "2016-11-14T00:05:42Z"
+		},
+		{
+			"checksumSHA1": "WjH6BtYreucaiAqweH8EVTuzfq4=",
+			"path": "goji.io/internal",
+			"revision": "0d89ff54b2c18c9c4ba530e32496aef902d3c6cd",
+			"revisionTime": "2016-11-14T00:05:42Z"
+		},
+		{
+			"checksumSHA1": "gCCLZgKj2pBECowciB75JYaJRx0=",
+			"path": "goji.io/pat",
+			"revision": "0d89ff54b2c18c9c4ba530e32496aef902d3c6cd",
+			"revisionTime": "2016-11-14T00:05:42Z"
+		},
+		{
+			"checksumSHA1": "HiFwLEdH2hi65LxmHk2lKjA3CU8=",
+			"path": "goji.io/pattern",
+			"revision": "0d89ff54b2c18c9c4ba530e32496aef902d3c6cd",
+			"revisionTime": "2016-11-14T00:05:42Z"
+		}
+	],
+	"rootPath": "github.com/David-Sharpe/heracles-api"
 }
