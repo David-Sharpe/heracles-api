@@ -85,7 +85,7 @@ func main() {
     db = pg.Connect(&pg.Options{
         User: "postgres",
         Password: os.Getenv("DB_PASSWORD"),
-        Database: "heracles"
+        Database: "heracles",
     })
 
     mux := goji.NewMux()
