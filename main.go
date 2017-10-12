@@ -80,13 +80,14 @@ func home(writer http.ResponseWriter, request *http.Request) {
 
 func main() {
     godotenv.Load()
+    dbOptions, _ := pg.ParseURL(os.Getenv("DATABASE_URL"))
+    fmt.Printf("%+v\n", *dbOptions)
 
     // messages := make(chan *workouts.DataObject)
-    db = pg.Connect(&pg.Options{
-        User: "postgres",
-        Password: os.Getenv("DB_PASSWORD"),
-        Database: "heracles",
-    })
+    if os.Getenv("ENVIRONMENT") == "dev" {
+        dbOptions.TLSConfig = nil
+    }
+    db = pg.Connect(dbOptions)
 
     mux := goji.NewMux()
     // handler, _ := gohaml.NewHamlHandler("./")
