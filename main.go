@@ -99,5 +99,5 @@ func main() {
     mux.HandleFunc(pat.Delete("/workouts/:id"), deleteWorkout)
     // mux.Handle("/", handler);
     // http.ListenAndServe("localhost:8000", handler)
-    http.ListenAndServe("localhost:8000", mux)
+    http.ListenAndServe(":" + os.Getenv("PORT"), mux)
 }
