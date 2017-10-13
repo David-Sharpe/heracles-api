@@ -103,7 +103,7 @@ func main() {
     mux.HandleFunc(pat.Post("/workouts/"), postWorkout)
     mux.HandleFunc(pat.Put("/workouts/:id"), putWorkout)
     mux.HandleFunc(pat.Delete("/workouts/:id"), deleteWorkout)
-    mux.HandleFunc(pat.Get("/db_setup"), buildDBb)
+    mux.HandleFunc(pat.Get("/db_setup"), buildDB)
     // mux.Handle("/", handler);
     // http.ListenAndServe("localhost:8000", handler)
     http.ListenAndServe(":" + os.Getenv("PORT"), mux)
