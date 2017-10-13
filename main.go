@@ -88,6 +88,7 @@ func main() {
         dbOptions.TLSConfig = nil
     }
     db = pg.Connect(dbOptions)
+    db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
 
     mux := goji.NewMux()
     // handler, _ := gohaml.NewHamlHandler("./")
