@@ -79,6 +79,11 @@ func home(writer http.ResponseWriter, request *http.Request) {
     homeTemplate.Execute(writer, workouts.Workout { Name: "test"})
 }
 
+func buildDB(writer http.ResponseWriter, request *http.Request) {
+    err := db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
+    fmt.Fprintf(writer, err)
+}
+
 func main() {
     godotenv.Load()
     dbOptions, _ := pg.ParseURL(os.Getenv("DATABASE_URL"))
@@ -98,8 +103,8 @@ func main() {
     mux.HandleFunc(pat.Post("/workouts/"), postWorkout)
     mux.HandleFunc(pat.Put("/workouts/:id"), putWorkout)
     mux.HandleFunc(pat.Delete("/workouts/:id"), deleteWorkout)
+    mux.HandleFunc(pat.Get("/db_setup"), buildDBb)
     // mux.Handle("/", handler);
     // http.ListenAndServe("localhost:8000", handler)
     http.ListenAndServe(":" + os.Getenv("PORT"), mux)
-    db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
 }
