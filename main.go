@@ -81,7 +81,7 @@ func home(writer http.ResponseWriter, request *http.Request) {
 
 func buildDB(writer http.ResponseWriter, request *http.Request) {
     err := db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
-    fmt.Fprintf(writer, err)
+    fmt.Fprintf(writer, err.Error())
 }
 
 func main() {
