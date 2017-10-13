@@ -5,6 +5,7 @@ import (
     "github.com/joho/godotenv"
     "github.com/David-Sharpe/heracles-api/workouts"
     "github.com/go-pg/pg"
+    "github.com/go-pg/pg/orm"
     "fmt"
     "text/template"
     "io/ioutil"
