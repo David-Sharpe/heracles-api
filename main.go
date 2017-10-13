@@ -71,7 +71,7 @@ func deleteWorkout(writer http.ResponseWriter, request *http.Request) {
 func home(writer http.ResponseWriter, request *http.Request) {
     var scope = make(map[string]interface{})
     scope["lang"] = "HAML"
-    content, _ := ioutil.ReadFile("sample.haml")
+    content, _ := ioutil.ReadFile("./haml/index.haml")
     engine, _ := gohaml.NewEngine(string(content))
     output := engine.Render(scope)
     homeTemplate := template.Must(template.New("").Parse(output))
