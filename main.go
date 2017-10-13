@@ -88,7 +88,6 @@ func main() {
         dbOptions.TLSConfig = nil
     }
     db = pg.Connect(dbOptions)
-    db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
 
     mux := goji.NewMux()
     // handler, _ := gohaml.NewHamlHandler("./")
@@ -101,4 +100,5 @@ func main() {
     // mux.Handle("/", handler);
     // http.ListenAndServe("localhost:8000", handler)
     http.ListenAndServe(":" + os.Getenv("PORT"), mux)
+    db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
 }
