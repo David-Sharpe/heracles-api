@@ -5,6 +5,7 @@ import (
     "github.com/joho/godotenv"
     "github.com/David-Sharpe/heracles-api/workouts"
     "github.com/go-pg/pg"
+    "github.com/go-pg/pg/orm"
     "fmt"
     "text/template"
     "io/ioutil"
@@ -71,11 +72,16 @@ func deleteWorkout(writer http.ResponseWriter, request *http.Request) {
 func home(writer http.ResponseWriter, request *http.Request) {
     var scope = make(map[string]interface{})
     scope["lang"] = "HAML"
-    content, _ := ioutil.ReadFile("sample.haml")
+    content, _ := ioutil.ReadFile("./haml/index.haml")
     engine, _ := gohaml.NewEngine(string(content))
     output := engine.Render(scope)
     homeTemplate := template.Must(template.New("").Parse(output))
     homeTemplate.Execute(writer, workouts.Workout { Name: "test"})
+}
+
+func buildDB(writer http.ResponseWriter, request *http.Request) {
+    err := db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
+    fmt.Fprintf(writer, err.Error())
 }
 
 func main() {
@@ -97,7 +103,8 @@ func main() {
     mux.HandleFunc(pat.Post("/workouts/"), postWorkout)
     mux.HandleFunc(pat.Put("/workouts/:id"), putWorkout)
     mux.HandleFunc(pat.Delete("/workouts/:id"), deleteWorkout)
+    mux.HandleFunc(pat.Get("/db_setup"), buildDB)
     // mux.Handle("/", handler);
     // http.ListenAndServe("localhost:8000", handler)
-    http.ListenAndServe("localhost:8000", mux)
+    http.ListenAndServe(":" + os.Getenv("PORT"), mux)
 }
