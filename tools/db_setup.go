@@ -2,7 +2,7 @@ package main
 
 import (
     "fmt"
-    "github.com/David-Sharpe/heracles/workouts"
+    "github.com/David-Sharpe/heracles-api/workouts"
     "github.com/go-pg/pg"
     "github.com/go-pg/pg/orm"
     "github.com/joho/godotenv"
