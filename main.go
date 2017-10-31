@@ -1,6 +1,7 @@
 package main
 
 import (
+    "github.com/garyburd/redigo/redis"
     "github.com/realistschuckle/gohaml"
     "github.com/joho/godotenv"
     "github.com/David-Sharpe/heracles-api/workouts"
@@ -19,6 +20,7 @@ import (
 )
 
 var db *pg.DB
+var cache redis.Conn
 
 func getIDFromRequest(request *http.Request) int64 {
     id, err := strconv.ParseInt(pat.Param(request, "id"), 10, 64)
@@ -29,12 +31,21 @@ func getIDFromRequest(request *http.Request) int64 {
 }
 
 func getWorkout(writer http.ResponseWriter, request *http.Request) {
-    workout := workouts.Workout{
-        ID: getIDFromRequest(request),
+    res, err := redis.String(cache.Do("GET", getIDFromRequest(request)))
+    if err != nil {
+        workout := workouts.Workout{
+            ID: getIDFromRequest(request),
+        }
+        workout.Read(db)
+        temp, _ := json.Marshal(workout)
+        res = string(temp)
+        cache.Do("SET", getIDFromRequest(request), res)
+    } else {
+
     }
-    workout.Read(db)
-    res, _ := json.Marshal(workout)
-    fmt.Fprintf(writer, string(res))
+
+    fmt.Printf("%#v\n", res)    
+    fmt.Fprintf(writer, res)
 }
 
 func postWorkout(writer http.ResponseWriter, request *http.Request) {
@@ -44,7 +55,9 @@ func postWorkout(writer http.ResponseWriter, request *http.Request) {
     decoder.Decode(&content)
     content.Create(db)
 
-    fmt.Fprintf(writer, "%+v\n", content)
+    response, _ := json.Marshal(content)
+    cache.Do("SET", content.ID, response)
+    fmt.Fprintf(writer, "%s\n", response)
     defer request.Body.Close()
 }
 
@@ -94,6 +107,17 @@ func main() {
         dbOptions.TLSConfig = nil
     }
     db = pg.Connect(dbOptions)
+
+    var connectionError error
+    cache, connectionError = redis.DialURL(os.Getenv("REDIS_URL"))
+    if connectionError != nil {
+        // Handle error
+    }
+    defer cache.Close()
+
+    cache.Do("SET", "hello", "world")
+    s, _ := redis.String(cache.Do("GET", "hello"))
+    fmt.Printf("%#v\n", s)
 
     mux := goji.NewMux()
     // handler, _ := gohaml.NewHamlHandler("./")
