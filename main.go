@@ -21,6 +21,7 @@ import (
 
 var db *pg.DB
 var cache redis.Conn
+var notice string
 
 func getIDFromRequest(request *http.Request) int64 {
     id, err := strconv.ParseInt(pat.Param(request, "id"), 10, 64)
@@ -97,6 +98,15 @@ func buildDB(writer http.ResponseWriter, request *http.Request) {
     fmt.Fprintf(writer, err.Error())
 }
 
+func getNotified(writer httpResponseWriter, request *http.Request) {
+    notice = request.Body
+    fmt.Fprintf(writer, "OK")
+}
+
+func retrieveNotifications(writer httpResponseWriter, request *httpRequest) {
+    fmt.Fprintf(writer, notice)
+}
+
 func main() {
     godotenv.Load()
     dbOptions, _ := pg.ParseURL(os.Getenv("DATABASE_URL"))
@@ -123,6 +133,8 @@ func main() {
     // handler, _ := gohaml.NewHamlHandler("./")
     // http.HandleFunc("/", handler)
     mux.HandleFunc(pat.Get("/"), home)
+    mux.HandleFunc(pat.Get("/notificatios"), retrieveNotifications)
+    mux.HandleFunc(pat.Post("/notificatios"), getNotified)
     mux.HandleFunc(pat.Get("/workouts/:id"), getWorkout)
     mux.HandleFunc(pat.Post("/workouts/"), postWorkout)
     mux.HandleFunc(pat.Put("/workouts/:id"), putWorkout)
