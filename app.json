@@ -1,0 +1,26 @@
+{
+  "name": "heracles-api",
+  "scripts": {},
+  "env": {
+    "ENVIRONMENT": {
+      "required": true
+    },
+    "REDIS_URL": {
+      "required": true
+    },
+    "SEMAPHORE_URL": {
+      "required": true
+    }
+  },
+  "formation": {},
+  "addons": [
+    "heroku-postgresql",
+    "heroku-redis",
+    "semaphore"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/go"
+    }
+  ]
+}
