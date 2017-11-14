@@ -71,7 +71,7 @@ func putWorkout(writer http.ResponseWriter, request *http.Request) {
     content.ID = id
     content.Update(db)
     response, _ := json.Marshal(content)
-    cache.Do("set", id, response)
+    cache.Do("SET", id, response)
     fmt.Fprintf(writer, "%s\n", response)
 }
 
@@ -81,6 +81,7 @@ func deleteWorkout(writer http.ResponseWriter, request *http.Request) {
         ID: id,
     }
     workout.Delete(db)
+    cache.Do("DEL", id)
     fmt.Fprintf(writer, "deleted")
 }
 
