@@ -1,10 +1,16 @@
 {
 	"comment": "",
 	"heroku": {
-		"goVersion": "go1.8"
+		"goVersion": "go1.12"
 	},
 	"ignore": "test",
 	"package": [
+		{
+			"path": "github.com/David-Sharpe/heracles-api",
+			"revision": "1ca439b7aa726a851ba67f21142c78bee594dd82",
+			"revisionTime": "2018-04-10T02:56:59Z",
+			"tree": true
+		},
 		{
 			"checksumSHA1": "2UmMbNHc8FBr98mJFN1k8ISOIHk=",
 			"path": "github.com/garyburd/redigo/internal",
