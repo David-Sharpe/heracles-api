@@ -1,7 +1,7 @@
 package main
 
 import (
-    "github.com/garyburd/redigo/redis"
+    "github.com/gomodule/redigo/redis"
     "github.com/realistschuckle/gohaml"
     "github.com/joho/godotenv"
     "github.com/David-Sharpe/heracles-api/workouts"
@@ -120,9 +120,9 @@ func main() {
     fmt.Printf("%+v\n", *dbOptions)
 
     // messages := make(chan *workouts.DataObject)
-    if os.Getenv("ENVIRONMENT") == "dev" {
-        dbOptions.TLSConfig = nil
-    }
+    // if os.Getenv("ENVIRONMENT") == "dev" {
+    //     dbOptions.TLSConfig = nil
+    // }
     db = pg.Connect(dbOptions)
 
     var connectionError error
