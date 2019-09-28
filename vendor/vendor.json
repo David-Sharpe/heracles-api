@@ -6,6 +6,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "lVktDHyqNFPF2fjZMW1qLNtRcnA=",
+			"path": "github.com/go-pg/pg",
+			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
+			"revisionTime": "2019-09-27T15:04:51Z"
+		},
+		{
 			"checksumSHA1": "vvAS24eY9tc/jfPwkkjV/rdmzFs=",
 			"path": "github.com/mattn/goveralls",
 			"revision": "4d9899298d217719a8aea971675da567f0e3f96d",
