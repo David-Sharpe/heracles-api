@@ -12,6 +12,12 @@
 			"revisionTime": "2019-09-27T15:04:51Z"
 		},
 		{
+			"checksumSHA1": "wBOJwx/m1ono/nwELlLEb0rLdZc=",
+			"path": "github.com/go-pg/pg/orm",
+			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
+			"revisionTime": "2019-09-27T15:04:51Z"
+		},
+		{
 			"checksumSHA1": "0Z5fQuQTlF3VlgBOHtUINlZO0fA=",
 			"path": "github.com/gomodule/redigo/redis",
 			"revision": "d3876d43bbbeb98b4d67309b4d3eef49438ef74c",
