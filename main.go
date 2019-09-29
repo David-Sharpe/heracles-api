@@ -2,7 +2,6 @@ package main
 
 import (
     "github.com/gomodule/redigo/redis"
-    "github.com/realistschuckle/gohaml"
     "github.com/joho/godotenv"
     "github.com/David-Sharpe/heracles-api/workouts"
     "github.com/go-pg/pg"
@@ -86,13 +85,7 @@ func deleteWorkout(writer http.ResponseWriter, request *http.Request) {
 }
 
 func home(writer http.ResponseWriter, request *http.Request) {
-    var scope = make(map[string]interface{})
-    scope["lang"] = "HAML"
-    content, _ := ioutil.ReadFile("./haml/index.haml")
-    engine, _ := gohaml.NewEngine(string(content))
-    output := engine.Render(scope)
-    homeTemplate := template.Must(template.New("").Parse(output))
-    homeTemplate.Execute(writer, workouts.Workout { Name: "test"})
+    fmt.Printf(writer, "OK")
 }
 
 func buildDB(writer http.ResponseWriter, request *http.Request) {
@@ -137,8 +130,6 @@ func main() {
     fmt.Printf("%#v\n", s)
 
     mux := goji.NewMux()
-    // handler, _ := gohaml.NewHamlHandler("./")
-    // http.HandleFunc("/", handler)
     mux.HandleFunc(pat.Get("/"), home)
     mux.HandleFunc(pat.Get("/notifications"), retrieveNotifications)
     mux.HandleFunc(pat.Post("/notifications"), getNotified)
