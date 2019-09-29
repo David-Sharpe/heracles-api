@@ -12,6 +12,12 @@
 			"revisionTime": "2019-09-27T15:04:51Z"
 		},
 		{
+			"checksumSHA1": "0Z5fQuQTlF3VlgBOHtUINlZO0fA=",
+			"path": "github.com/gomodule/redigo/redis",
+			"revision": "d3876d43bbbeb98b4d67309b4d3eef49438ef74c",
+			"revisionTime": "2019-07-28T19:03:53Z"
+		},
+		{
 			"checksumSHA1": "vvAS24eY9tc/jfPwkkjV/rdmzFs=",
 			"path": "github.com/mattn/goveralls",
 			"revision": "4d9899298d217719a8aea971675da567f0e3f96d",
