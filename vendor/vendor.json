@@ -22,6 +22,18 @@
 			"path": "github.com/mattn/goveralls",
 			"revision": "4d9899298d217719a8aea971675da567f0e3f96d",
 			"revisionTime": "2019-06-05T10:30:25Z"
+		},
+		{
+			"checksumSHA1": "OvrNwcBO+xO4FZ7eMbazho1C3t0=",
+			"path": "goji.io",
+			"revision": "490b001d03d16a116d7c44d95d216c69a1aae798",
+			"revisionTime": "2019-01-26T23:58:29Z"
+		},
+		{
+			"checksumSHA1": "pwKEcvjPuybiYSQSn54I/Za9S94=",
+			"path": "goji.io/pat",
+			"revision": "490b001d03d16a116d7c44d95d216c69a1aae798",
+			"revisionTime": "2019-01-26T23:58:29Z"
 		}
 	],
 	"rootPath": "github.com/David-Sharpe/heracles-api"
