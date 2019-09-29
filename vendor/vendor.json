@@ -9,13 +9,39 @@
 			"checksumSHA1": "lVktDHyqNFPF2fjZMW1qLNtRcnA=",
 			"path": "github.com/go-pg/pg",
 			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
-			"revisionTime": "2019-09-27T15:04:51Z"
+			"revisionTime": "2019-09-27T15:04:51Z",
+			"version": "v9",
+			"versionExact": "v9.0.0-beta.14"
 		},
 		{
 			"checksumSHA1": "wBOJwx/m1ono/nwELlLEb0rLdZc=",
 			"path": "github.com/go-pg/pg/orm",
 			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
 			"revisionTime": "2019-09-27T15:04:51Z"
+		},
+		{
+			"path": "github.com/go-pg/pg/v9/internal",
+			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
+			"version": "v9",
+			"versionExact": "v9.0.0-beta.14"
+		},
+		{
+			"path": "github.com/go-pg/pg/v9/internal/pool",
+			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
+			"version": "v9",
+			"versionExact": "v9.0.0-beta.14"
+		},
+		{
+			"path": "github.com/go-pg/pg/v9/orm",
+			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
+			"version": "v9",
+			"versionExact": "v9.0.0-beta.14"
+		},
+		{
+			"path": "github.com/go-pg/pg/v9/types",
+			"revision": "8ea97a982f1c37b4b09cf5943a801d1f79c3a5e3",
+			"version": "v9",
+			"versionExact": "v9.0.0-beta.14"
 		},
 		{
 			"checksumSHA1": "0Z5fQuQTlF3VlgBOHtUINlZO0fA=",
@@ -40,6 +66,18 @@
 			"path": "goji.io/pat",
 			"revision": "490b001d03d16a116d7c44d95d216c69a1aae798",
 			"revisionTime": "2019-01-26T23:58:29Z"
+		},
+		{
+			"checksumSHA1": "1MGpGDQqnUoRpv7VEcQrXOBydXE=",
+			"path": "golang.org/x/crypto/pbkdf2",
+			"revision": "a832865fa7ada6126f4c6124ac49f71be71bff2a",
+			"revisionTime": "2019-08-28T21:16:55Z"
+		},
+		{
+			"checksumSHA1": "3d7mxBDmd5LIAyMUYe5teXGXWTM=",
+			"path": "mellium.im/sasl",
+			"revision": "e27ea4901008898ec096743695a52411c2d03886",
+			"revisionTime": "2019-08-15T21:08:34Z"
 		}
 	],
 	"rootPath": "github.com/David-Sharpe/heracles-api"
