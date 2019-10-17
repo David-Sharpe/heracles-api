@@ -109,6 +109,8 @@ func retrieveNotifications(writer http.ResponseWriter, request *http.Request) {
 
 func main() {
     godotenv.Load()
+    config := newrelic.NewConfig("heracles-api", os.Getenv("NEW_RELIC_KEY"))
+    app, err := newrelic.NewApplication(config)
     dbOptions, _ := pg.ParseURL(os.Getenv("DATABASE_URL"))
     fmt.Printf("%+v\n", *dbOptions)
 
