@@ -4,11 +4,11 @@ import (
     "github.com/gomodule/redigo/redis"
     "github.com/joho/godotenv"
     "github.com/David-Sharpe/heracles-api/workouts"
-    "github.com/go-pg/pg"
-    "github.com/go-pg/pg/orm"
+    // "github.com/go-pg/pg/v9"
+    // "github.com/go-pg/pg/v9/orm"
     "fmt"
-    "text/template"
-    "io/ioutil"
+    // "text/template"
+    // "io/ioutil"
     "net/http"
     "encoding/json"
     "os"
@@ -17,7 +17,7 @@ import (
     "goji.io/pat"
 )
 
-var db *pg.DB
+// var db *pg.DB
 var cache redis.Conn
 var notice []byte
 
@@ -29,18 +29,20 @@ func getIDFromRequest(request *http.Request) int64 {
     return id
 }
 
-func getWorkout(writer http.ResponseWriter, request *http.Request) {
+func getWorkouts(writer http.ResponseWriter, request *http.Request) {
+    var res string
     res, err := redis.String(cache.Do("GET", getIDFromRequest(request)))
     if err != nil {
         workout := workouts.Workout{
             ID: getIDFromRequest(request),
+            Exercises: []workouts.Exercise{},
         }
-        workout.Read(db)
+        // workout.Read(db)
         temp, _ := json.Marshal(workout)
         res = string(temp)
-        cache.Do("SET", getIDFromRequest(request), res)
+    //     cache.Do("SET", getIDFromRequest(request), res)
     } else {
-
+        fmt.Printf("err is %#v", err)
     }
 
     fmt.Printf("%#v\n", res)    
@@ -52,7 +54,7 @@ func postWorkout(writer http.ResponseWriter, request *http.Request) {
     var content workouts.Workout
 
     decoder.Decode(&content)
-    content.Create(db)
+    // content.Create(db)
 
     response, _ := json.Marshal(content)
     cache.Do("SET", content.ID, response)
@@ -68,7 +70,7 @@ func putWorkout(writer http.ResponseWriter, request *http.Request) {
     decoder.Decode(&content)
     fmt.Printf("%v\n", content)
     content.ID = id
-    content.Update(db)
+    // content.Update(db)
     response, _ := json.Marshal(content)
     cache.Do("SET", id, response)
     fmt.Fprintf(writer, "%s\n", response)
@@ -76,32 +78,32 @@ func putWorkout(writer http.ResponseWriter, request *http.Request) {
 
 func deleteWorkout(writer http.ResponseWriter, request *http.Request) {
     id, _ := strconv.ParseInt(pat.Param(request, "id"), 10, 64)
-    workout := workouts.Workout{
-        ID: id,
-    }
-    workout.Delete(db)
+    // workout := workouts.Workout{
+    //     ID: id,
+    // }
+    // workout.Delete(db)
     cache.Do("DEL", id)
     fmt.Fprintf(writer, "deleted")
 }
 
 func home(writer http.ResponseWriter, request *http.Request) {
-    fmt.Printf(writer, "OK")
+    fmt.Fprintf(writer, "OK")
 }
 
-func buildDB(writer http.ResponseWriter, request *http.Request) {
-    err := db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
-    fmt.Fprintf(writer, err.Error())
-}
+// func buildDB(writer http.ResponseWriter, request *http.Request) {
+//     err := db.CreateTable(&workouts.Workout{}, &orm.CreateTableOptions{Temp: false,})
+//     fmt.Fprintf(writer, err.Error())
+// }
 
-func getNotified(writer http.ResponseWriter, request *http.Request) {
-    body, err := ioutil.ReadAll(request.Body)
-    notice = body
-    if err != nil {
-        fmt.Fprintf(writer, "OK")
-    } else {
-        fmt.Fprintf(writer, "Fail")
-    }
-}
+// func getNotified(writer http.ResponseWriter, request *http.Request) {
+//     body, err := ioutil.ReadAll(request.Body)
+//     notice = body
+//     if err != nil {
+//         fmt.Fprintf(writer, "OK")
+//     } else {
+//         fmt.Fprintf(writer, "Fail")
+//     }
+// }
 
 func retrieveNotifications(writer http.ResponseWriter, request *http.Request) {
     fmt.Fprintf(writer, string(notice))
@@ -109,16 +111,16 @@ func retrieveNotifications(writer http.ResponseWriter, request *http.Request) {
 
 func main() {
     godotenv.Load()
-    config := newrelic.NewConfig("heracles-api", os.Getenv("NEW_RELIC_KEY"))
-    app, err := newrelic.NewApplication(config)
-    dbOptions, _ := pg.ParseURL(os.Getenv("DATABASE_URL"))
-    fmt.Printf("%+v\n", *dbOptions)
+    // config := newrelic.NewConfig("heracles-api", os.Getenv("NEW_RELIC_KEY"))
+    // app, err := newrelic.NewApplication(config)
+    // dbOptions, _ := pg.ParseURL(os.Getenv("DATABASE_URL"))
+    // fmt.Printf("%+v\n", *dbOptions)
 
     // messages := make(chan *workouts.DataObject)
     // if os.Getenv("ENVIRONMENT") == "dev" {
     //     dbOptions.TLSConfig = nil
     // }
-    db = pg.Connect(dbOptions)
+    // db = pg.Connect(dbOptions)
 
     var connectionError error
     cache, connectionError = redis.DialURL(os.Getenv("REDIS_URL"))
@@ -127,19 +129,15 @@ func main() {
     }
     defer cache.Close()
 
-    cache.Do("SET", "hello", "world")
-    s, _ := redis.String(cache.Do("GET", "hello"))
-    fmt.Printf("%#v\n", s)
-
     mux := goji.NewMux()
     mux.HandleFunc(pat.Get("/"), home)
-    mux.HandleFunc(pat.Get("/notifications"), retrieveNotifications)
-    mux.HandleFunc(pat.Post("/notifications"), getNotified)
-    mux.HandleFunc(pat.Get("/workouts/:id"), getWorkout)
+    // mux.HandleFunc(pat.Get("/notifications"), retrieveNotifications)
+    // mux.HandleFunc(pat.Post("/notifications"), getNotified)
+    mux.HandleFunc(pat.Get("/workouts/:id"), getWorkouts)
     mux.HandleFunc(pat.Post("/workouts/"), postWorkout)
     mux.HandleFunc(pat.Put("/workouts/:id"), putWorkout)
     mux.HandleFunc(pat.Delete("/workouts/:id"), deleteWorkout)
-    mux.HandleFunc(pat.Get("/db_setup"), buildDB)
+    // mux.HandleFunc(pat.Get("/db_setup"), buildDB)
     // mux.Handle("/", handler);
     // http.ListenAndServe("localhost:8000", handler)
     http.ListenAndServe(":" + os.Getenv("PORT"), mux)
