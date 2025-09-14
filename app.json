@@ -1,3 +1,5 @@
 {
-  "stack": "container"
+  "name": "heracles_api",
+  "stack": "container",
+  "success_url": "/"
 }
