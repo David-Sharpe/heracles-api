@@ -2,4 +2,4 @@ build:
     docker:
       web: Dockerfile
 run:
-  web: bundle exec -C config/puma.rb
+  web: docker run -d -p 8080:8080 --name heracles-api
