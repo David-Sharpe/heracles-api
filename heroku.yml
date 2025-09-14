@@ -1,5 +1,5 @@
 build:
-    docker:
-      web: Dockerfile
+  docker:
+    web: Dockerfile
 run:
-  web: docker run -d -p 8080:8080 --name heracles-api
+  web:  docker run --publish 8080:8080 heracles_api
