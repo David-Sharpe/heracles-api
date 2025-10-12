@@ -1,5 +1,4 @@
+setup:
 build:
   docker:
     web: Dockerfile
-run:
-  web:  docker run --publish 8080:8080 heracles_api
