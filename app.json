@@ -1,0 +1,6 @@
+{
+  "name": "heracles_api",
+  "repository": "https://github.com/David-Sharpe/heracles-api.git",
+  "stack": "container",
+  "success_url": "/"
+}
