@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: ./heracles-api
+  web: /heracles-api/heracles-api
