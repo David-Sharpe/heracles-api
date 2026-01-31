@@ -4,8 +4,8 @@ WORKDIR /heracles-api
 COPY . ./
 RUN go mod download
 
-RUN go build -o heracles-api .
+EXPOSE 8080
 
-#EXPOSE 8080
+RUN go build -o heracles-api .
 
 CMD ["/heracles-api/heracles-api"]
