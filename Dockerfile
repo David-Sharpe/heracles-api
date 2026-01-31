@@ -8,4 +8,4 @@ RUN go build -o heracles-api .
 
 EXPOSE 8080
 
-CMD ["/heracles-api/heracles-api"]
+CMD ["heracles-api"]
