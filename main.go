@@ -42,6 +42,7 @@ func main() {
 	})
 
 	err := http.ListenAndServe(os.Getenv("PORT"), nil)
+	//err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		return
 	}
