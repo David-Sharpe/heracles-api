@@ -4,7 +4,9 @@ WORKDIR /heracles-api
 COPY . ./
 RUN go mod download
 
-EXPOSE 8080
+ENV PORT=$port
+
+EXPOSE $PORT
 
 RUN go build -o heracles-api .
 
