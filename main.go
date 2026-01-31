@@ -38,7 +38,6 @@ func main() {
 				return
 			}
 		}
-
 	})
 
 	err := http.ListenAndServe(os.Getenv("PORT"), nil)
