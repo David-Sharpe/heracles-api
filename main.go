@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"heracles-api/domain"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -40,7 +41,7 @@ func main() {
 
 	})
 
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(os.Getenv("PORT"), nil)
 	if err != nil {
 		return
 	}
