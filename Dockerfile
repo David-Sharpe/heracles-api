@@ -6,6 +6,6 @@ RUN go mod download
 
 RUN go build -o heracles-api .
 
-EXPOSE 8080
+#EXPOSE 8080
 
 CMD ["/heracles-api/heracles-api"]
