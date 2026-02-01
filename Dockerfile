@@ -7,8 +7,6 @@ RUN go mod download
 
 ENV PORT=$port
 
-#EXPOSE 8080
-
 RUN go build -o heracles-api .
 
 CMD ["/heracles-api/heracles-api"]
