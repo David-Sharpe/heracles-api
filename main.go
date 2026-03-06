@@ -6,10 +6,13 @@ import (
 	"heracles-api/domain"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	router := mux.NewRouter()
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		_, err := fmt.Fprintf(w, "Hello World!\n")
 		if err != nil {
 			return
@@ -41,7 +44,6 @@ func main() {
 	})
 
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
-	//err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		return
 	}
