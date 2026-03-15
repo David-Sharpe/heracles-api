@@ -19,7 +19,7 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/workouts", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/workouts", func(w http.ResponseWriter, r *http.Request) {
 		workout := domain.Workout{Name: "Bench press"}
 		err := json.NewEncoder(w).Encode(workout)
 		if err != nil {
@@ -27,7 +27,7 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/plans", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/plans", func(w http.ResponseWriter, r *http.Request) {
 		workout := domain.Workout{Name: "Squat"}
 		if r.Method == "POST" {
 			err := json.NewEncoder(w).Encode(workout)
@@ -43,7 +43,7 @@ func main() {
 		}
 	})
 
-	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	err := http.ListenAndServe(":"+os.Getenv("PORT"), router)
 	if err != nil {
 		return
 	}
