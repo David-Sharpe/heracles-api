@@ -3,6 +3,7 @@ LABEL authors="forkbomb.net"
 ARG port
 WORKDIR /heracles-api
 COPY . ./
+RUN go get heracles-api
 RUN go mod download
 
 ENV PORT=$port

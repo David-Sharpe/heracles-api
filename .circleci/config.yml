@@ -1,0 +1,39 @@
+version: 2.1
+orbs:
+  go: circleci/go@3.0.2
+  heroku: circleci/heroku@2.0.0
+
+jobs:
+  build_and_test: # this can be any name you choose
+    executor:
+      name: go/default # Use the default executor from the orb
+      tag: '1.22' # Specify a version tag
+    steps:
+      - checkout # checkout source code
+      - go/mod-download # Download and cache Go modules
+      - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
+          covermode: atomic
+          failfast: true
+          race: true
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
+
+  deploy: # this can be any name you choose
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
